@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>节日庆典海报</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&family=Noto+Sans+SC:wght@300;400;500;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        /* 主题色变量 - 替换此处即可切换配色 */
+        :root {
+            --primary: #8b1a1a;
+            --primary-rgb: 139, 26, 26;
+            --bg: #1a0a0a;
+            --bg-secondary: #2a1010;
+            --text: #f5e6d0;
+            --text-secondary: #c9a87c;
+            --accent: #d4a853;
+            --accent-rgb: 212, 168, 83;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #0a0505;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            padding: 40px 20px;
+            font-family: 'Noto Sans SC', 'Inter', sans-serif;
+        }
+
+        .poster {
+            width: 600px;
+            min-height: 850px;
+            background: var(--bg);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 8px 60px rgba(var(--accent-rgb), 0.12);
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* 金色边框 */
+        .border-frame {
+            position: absolute;
+            top: 16px;
+            left: 16px;
+            right: 16px;
+            bottom: 16px;
+            border: 1px solid rgba(var(--accent-rgb), 0.3);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .border-frame::before {
+            content: '';
+            position: absolute;
+            top: -1px;
+            left: 30px;
+            right: 30px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--accent), transparent);
+        }
+
+        .border-frame::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 30px;
+            right: 30px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--accent), transparent);
+        }
+
+        /* 四角装饰 - 简化传统纹样 */
+        .corner {
+            position: absolute;
+            width: 32px;
+            height: 32px;
+            z-index: 2;
+        }
+
+        .corner::before,
+        .corner::after {
+            content: '';
+            position: absolute;
+            background: var(--accent);
+        }
+
+        .corner-tl { top: 12px; left: 12px; }
+        .corner-tl::before { top: 0; left: 0; width: 32px; height: 2px; }
+        .corner-tl::after { top: 0; left: 0; width: 2px; height: 32px; }
+
+        .corner-tr { top: 12px; right: 12px; }
+        .corner-tr::before { top: 0; right: 0; width: 32px; height: 2px; }
+        .corner-tr::after { top: 0; right: 0; width: 2px; height: 32px; }
+
+        .corner-bl { bottom: 12px; left: 12px; }
+        .corner-bl::before { bottom: 0; left: 0; width: 32px; height: 2px; }
+        .corner-bl::after { bottom: 0; left: 0; width: 2px; height: 32px; }
+
+        .corner-br { bottom: 12px; right: 12px; }
+        .corner-br::before { bottom: 0; right: 0; width: 32px; height: 2px; }
+        .corner-br::after { bottom: 0; right: 0; width: 2px; height: 32px; }
+
+        /* 灯笼感装饰 */
+        .lantern {
+            position: absolute;
+            top: 60px;
+            right: 60px;
+            width: 36px;
+            height: 48px;
+            z-index: 2;
+        }
+
+        .lantern::before {
+            content: '';
+            position: absolute;
+            top: 4px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 30px;
+            height: 38px;
+            border-radius: 50%;
+            background: radial-gradient(ellipse, rgba(var(--primary-rgb), 0.8), rgba(var(--primary-rgb), 0.4));
+            border: 1px solid rgba(var(--accent-rgb), 0.4);
+            box-shadow: 0 0 16px rgba(var(--accent-rgb), 0.2);
+        }
+
+        .lantern::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 14px;
+            height: 6px;
+            background: var(--accent);
+            border-radius: 2px;
+        }
+
+        .lantern-2 {
+            position: absolute;
+            top: 80px;
+            right: 110px;
+            width: 24px;
+            height: 32px;
+            z-index: 2;
+            opacity: 0.6;
+        }
+
+        .lantern-2::before {
+            content: '';
+            position: absolute;
+            top: 4px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 26px;
+            border-radius: 50%;
+            background: radial-gradient(ellipse, rgba(var(--primary-rgb), 0.6), rgba(var(--primary-rgb), 0.3));
+            border: 1px solid rgba(var(--accent-rgb), 0.3);
+        }
+
+        .lantern-2::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 10px;
+            height: 4px;
+            background: var(--accent);
+            border-radius: 1px;
+        }
+
+        /* 内容容器 */
+        .content-wrapper {
+            padding: 60px 50px;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            position: relative;
+            z-index: 3;
+        }
+
+        /* 标签/徽章区 */
+        .badge-area {
+            margin-bottom: 36px;
+            text-align: center;
+        }
+
+        .badge {
+            display: inline-block;
+            font-size: 12px;
+            font-weight: 500;
+            letter-spacing: 4px;
+            color: var(--accent);
+            padding: 8px 20px;
+            position: relative;
+            animation: badgeShimmer 3s ease-in-out infinite;
+        }
+
+        .badge::before,
+        .badge::after {
+            content: '◆';
+            font-size: 8px;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--accent);
+            opacity: 0.6;
+        }
+
+        .badge::before { left: 0; }
+        .badge::after { right: 0; }
+
+        @keyframes badgeShimmer {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; text-shadow: 0 0 8px rgba(var(--accent-rgb), 0.5); }
+        }
+
+        /* 主标题 */
+        .title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 44px;
+            font-weight: 900;
+            line-height: 1.35;
+            color: var(--text);
+            text-align: center;
+            margin-bottom: 16px;
+            text-shadow: 0 2px 12px rgba(var(--accent-rgb), 0.2);
+        }
+
+        /* 副标题 */
+        .subtitle {
+            font-size: 16px;
+            font-weight: 400;
+            color: var(--text-secondary);
+            text-align: center;
+            margin-bottom: 48px;
+            line-height: 1.6;
+            letter-spacing: 1px;
+        }
+
+        /* 分隔线 - 传统风格 */
+        .divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            margin-bottom: 40px;
+        }
+
+        .divider .line {
+            width: 60px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(var(--accent-rgb), 0.5), transparent);
+        }
+
+        .divider .ornament {
+            width: 10px;
+            height: 10px;
+            border: 1px solid var(--accent);
+            transform: rotate(45deg);
+        }
+
+        /* 信息行 */
+        .info-section {
+            margin-bottom: 36px;
+        }
+
+        .info-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 16px;
+            gap: 16px;
+        }
+
+        .info-label {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--accent);
+            width: 50px;
+            text-align: right;
+        }
+
+        .info-separator {
+            width: 1px;
+            height: 16px;
+            background: rgba(var(--accent-rgb), 0.3);
+        }
+
+        .info-value {
+            font-size: 15px;
+            font-weight: 400;
+            color: var(--text);
+            letter-spacing: 0.5px;
+        }
+
+        /* 正文描述 */
+        .description {
+            font-size: 14px;
+            font-weight: 300;
+            line-height: 2;
+            color: var(--text-secondary);
+            text-align: center;
+            margin-bottom: auto;
+            padding: 0 20px 40px;
+        }
+
+        /* 底部信息栏 */
+        .footer {
+            margin-top: auto;
+            padding-top: 30px;
+            text-align: center;
+        }
+
+        .footer-main {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--accent);
+            margin-bottom: 8px;
+            letter-spacing: 2px;
+        }
+
+        .footer-sub {
+            font-size: 11px;
+            color: var(--text-secondary);
+            opacity: 0.7;
+            letter-spacing: 1px;
+        }
+    </style>
+</head>
+<body>
+    <div class="poster">
+        <!-- 金色边框 -->
+        <div class="border-frame"></div>
+
+        <!-- 四角装饰 -->
+        <div class="corner corner-tl"></div>
+        <div class="corner corner-tr"></div>
+        <div class="corner corner-bl"></div>
+        <div class="corner corner-br"></div>
+
+        <!-- 灯笼装饰 -->
+        <div class="lantern"></div>
+        <div class="lantern-2"></div>
+
+        <!-- 内容容器 -->
+        <div class="content-wrapper">
+            <!-- POSTER_CONTENT -->
+
+            <!-- 标签/徽章区 -->
+            <div class="badge-area">
+                <span class="badge">壹周年庆典</span>
+            </div>
+
+            <!-- 主标题 -->
+            <h1 class="title">盛世华章<br>感恩同行</h1>
+
+            <!-- 副标题 -->
+            <p class="subtitle">暨年度答谢晚宴诚邀您的莅临</p>
+
+            <!-- 分隔线 -->
+            <div class="divider">
+                <span class="line"></span>
+                <span class="ornament"></span>
+                <span class="line"></span>
+            </div>
+
+            <!-- 信息行 -->
+            <div class="info-section">
+                <div class="info-row">
+                    <span class="info-label">时间</span>
+                    <span class="info-separator"></span>
+                    <span class="info-value">2026年12月28日 18:30</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">地点</span>
+                    <span class="info-separator"></span>
+                    <span class="info-value">上海半岛酒店 · 宴会大厅</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">着装</span>
+                    <span class="info-separator"></span>
+                    <span class="info-value">正装出席 · 红色系优先</span>
+                </div>
+            </div>
+
+            <!-- 正文描述 -->
+            <p class="description">
+                回望来路，感恩每一位伙伴的信任与同行。在这个特别的夜晚，让我们举杯共庆，共同见证过去一年的辉煌成就，展望充满无限可能的新篇章。精彩晚宴、颁奖典礼与惊喜环节，等您亲临。
+            </p>
+
+            <!-- 底部信息栏 -->
+            <div class="footer">
+                <div class="footer-main">诚邀莅临 · 恭候光临</div>
+                <div class="footer-sub">ANNIVERSARY GALA 2026</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

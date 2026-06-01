@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>童趣复古字绘海报</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@600;700;900&family=ZCOOL+XiaoWei&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #d7a928;
+            --primary-rgb: 215, 169, 40;
+            --bg: #f6efe4;
+            --bg-secondary: #eadfcf;
+            --text: #477f79;
+            --text-secondary: #6f8178;
+            --accent: #d96f36;
+            --accent-rgb: 217, 111, 54;
+            --blue: #6aa3a7;
+            --green: #6f9868;
+            --red: #b84d32;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            background: #ded4c6;
+            font-family: 'Noto Serif SC', serif;
+        }
+
+        .poster {
+            width: 600px;
+            min-height: 900px;
+            position: relative;
+            overflow: hidden;
+            padding: 64px 78px 48px;
+            background:
+                radial-gradient(circle at 20% 18%, rgba(var(--primary-rgb), 0.06), transparent 22%),
+                radial-gradient(circle at 78% 68%, rgba(var(--accent-rgb), 0.06), transparent 20%),
+                var(--bg);
+            box-shadow: 0 18px 50px rgba(74, 63, 48, 0.16);
+        }
+
+        .poster::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            opacity: 0.23;
+            background-image:
+                radial-gradient(rgba(65, 54, 39, 0.22) 0.65px, transparent 0.65px),
+                radial-gradient(rgba(255, 255, 255, 0.5) 0.6px, transparent 0.6px);
+            background-size: 5px 5px, 7px 7px;
+            mix-blend-mode: multiply;
+        }
+
+        .poster::after {
+            content: '';
+            position: absolute;
+            inset: 18px;
+            border: 1px solid rgba(88, 102, 88, 0.14);
+            pointer-events: none;
+        }
+
+        .top-number {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            gap: 14px;
+            margin-bottom: 2px;
+            font-size: 150px;
+            line-height: 0.84;
+            font-weight: 900;
+            letter-spacing: -6px;
+            color: var(--primary);
+            font-family: Georgia, 'Noto Serif SC', serif;
+            text-shadow: 1px 1px 0 rgba(80, 70, 48, 0.08);
+        }
+
+        .top-number .dot {
+            font-size: 58px;
+            color: var(--red);
+            transform: translateY(-8px);
+        }
+
+        .top-number .one {
+            color: var(--accent);
+        }
+
+        .swing-kid {
+            position: absolute;
+            top: 188px;
+            left: 244px;
+            width: 72px;
+            height: 86px;
+            z-index: 2;
+        }
+
+        .swing-kid::before,
+        .swing-kid::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            width: 1px;
+            height: 58px;
+            background: rgba(122, 89, 43, 0.7);
+        }
+
+        .swing-kid::before { left: 18px; transform: rotate(-7deg); }
+        .swing-kid::after { right: 18px; transform: rotate(7deg); }
+
+        .kid-body {
+            position: absolute;
+            left: 23px;
+            top: 32px;
+            width: 26px;
+            height: 28px;
+            border-radius: 50% 50% 44% 44%;
+            background: var(--accent);
+        }
+
+        .kid-body::before {
+            content: '';
+            position: absolute;
+            left: 6px;
+            top: -15px;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: var(--accent);
+        }
+
+        .kid-body::after {
+            content: '';
+            position: absolute;
+            left: -12px;
+            top: 23px;
+            width: 50px;
+            height: 4px;
+            border-radius: 4px;
+            background: var(--accent);
+        }
+
+        .main-title {
+            position: relative;
+            z-index: 1;
+            display: grid;
+            justify-items: center;
+            gap: 10px;
+            margin: 10px auto 26px;
+            text-align: center;
+        }
+
+        .main-title span {
+            display: block;
+            width: max-content;
+            max-width: 100%;
+            font-family: 'ZCOOL XiaoWei', 'Noto Serif SC', serif;
+            font-size: 138px;
+            font-weight: 900;
+            line-height: 0.92;
+            letter-spacing: 4px;
+            color: var(--text);
+            transform: rotate(var(--tilt));
+            text-shadow:
+                1px 0 rgba(255, 255, 255, 0.45),
+                -1px 0 rgba(80, 72, 54, 0.06);
+        }
+
+        .main-title span:nth-child(1) {
+            --tilt: -2deg;
+            color: var(--blue);
+        }
+
+        .main-title span:nth-child(2) {
+            --tilt: 1deg;
+            color: var(--green);
+        }
+
+        .main-title span:nth-child(3) {
+            --tilt: -1deg;
+            color: var(--text);
+        }
+
+        .paper-plane {
+            position: absolute;
+            right: 84px;
+            top: 342px;
+            z-index: 2;
+            width: 0;
+            height: 0;
+            border-left: 46px solid var(--accent);
+            border-top: 14px solid transparent;
+            border-bottom: 14px solid transparent;
+            transform: rotate(-18deg);
+            filter: drop-shadow(0 1px 0 rgba(70, 60, 45, 0.12));
+        }
+
+        .paper-plane::after {
+            content: '';
+            position: absolute;
+            left: -43px;
+            top: -2px;
+            width: 64px;
+            border-top: 1px dashed rgba(122, 126, 83, 0.55);
+            transform: translateX(-70px) rotate(-12deg);
+        }
+
+        .balloon {
+            position: absolute;
+            right: 94px;
+            top: 216px;
+            z-index: 2;
+            width: 40px;
+            height: 48px;
+            border-radius: 50%;
+            background: rgba(106, 163, 167, 0.75);
+        }
+
+        .balloon::after {
+            content: '';
+            position: absolute;
+            left: 19px;
+            top: 48px;
+            width: 1px;
+            height: 54px;
+            background: rgba(74, 105, 96, 0.5);
+            transform: rotate(14deg);
+        }
+
+        .side-note {
+            position: absolute;
+            left: 92px;
+            bottom: 168px;
+            z-index: 2;
+            writing-mode: vertical-rl;
+            font-size: 14px;
+            line-height: 1.9;
+            letter-spacing: 2px;
+            color: var(--text-secondary);
+        }
+
+        .side-note::after {
+            content: '';
+            display: inline-block;
+            width: 9px;
+            height: 9px;
+            margin-top: 12px;
+            border: 2px solid var(--accent);
+            border-radius: 50%;
+        }
+
+        .slide {
+            position: absolute;
+            right: 138px;
+            bottom: 112px;
+            z-index: 2;
+            width: 126px;
+            height: 82px;
+            border-left: 12px solid rgba(106, 163, 167, 0.7);
+            border-bottom: 12px solid rgba(106, 163, 167, 0.7);
+            border-radius: 0 0 58px 0;
+            transform: rotate(10deg);
+        }
+
+        .slide::before {
+            content: '';
+            position: absolute;
+            left: -58px;
+            top: 2px;
+            width: 42px;
+            height: 78px;
+            background:
+                linear-gradient(90deg, transparent 45%, rgba(106, 163, 167, 0.68) 45% 55%, transparent 55%),
+                repeating-linear-gradient(0deg, transparent 0 16px, rgba(106, 163, 167, 0.68) 16px 20px);
+        }
+
+        .slide::after {
+            content: '';
+            position: absolute;
+            right: 4px;
+            bottom: 12px;
+            width: 22px;
+            height: 22px;
+            border-radius: 50% 50% 44% 44%;
+            background: var(--green);
+        }
+
+        .footer {
+            position: relative;
+            z-index: 2;
+            margin-top: 34px;
+            text-align: center;
+            font-size: 13px;
+            letter-spacing: 12px;
+            color: var(--text-secondary);
+        }
+
+        .seal {
+            width: 22px;
+            height: 22px;
+            margin: 14px auto 0;
+            border: 2px solid var(--red);
+            color: var(--red);
+            font-size: 10px;
+            line-height: 18px;
+            letter-spacing: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="poster">
+        <div class="top-number">
+            <span>6</span><span class="dot">.</span><span class="one">1</span>
+        </div>
+
+        <div class="swing-kid">
+            <div class="kid-body"></div>
+        </div>
+        <div class="balloon"></div>
+        <div class="paper-plane"></div>
+
+        <h1 class="main-title">
+            <span>儿</span>
+            <span>童</span>
+            <span>节</span>
+        </h1>
+
+        <p class="side-note">愿你永远被爱，快乐长大。</p>
+        <div class="slide"></div>
+
+        <div class="footer">
+            DESIGN
+            <div class="seal">童</div>
+        </div>
+    </div>
+</body>
+</html>

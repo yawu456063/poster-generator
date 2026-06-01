@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>示例海报 — AI 开发者大会 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;700;900&family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: #e8eaf0;
+    font-family: 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    padding: 40px 20px;
+  }
+  .poster {
+    width: 600px;
+    min-height: 850px;
+    background: linear-gradient(150deg, #0a0f1e 0%, #0d1b3e 60%, #0a2a4a 100%);
+    border-radius: 20px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.4);
+    color: #ffffff;
+    padding: 52px 44px 44px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* 装饰元素 */
+  .deco { position: absolute; border-radius: 50%; }
+  .deco-1 {
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(0,102,255,0.15), transparent);
+    top: -120px; right: -120px;
+  }
+  .deco-2 {
+    width: 250px; height: 250px;
+    background: radial-gradient(circle, rgba(0,212,255,0.1), transparent);
+    bottom: 80px; left: -80px;
+  }
+  .deco-line {
+    position: absolute;
+    top: 0; left: 44px; right: 44px;
+    height: 3px;
+    background: linear-gradient(90deg, #0066ff, #00d4ff, transparent);
+  }
+
+  /* 头部标签 */
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(0,102,255,0.15);
+    border: 1px solid rgba(0,102,255,0.4);
+    color: #60b8ff;
+    padding: 7px 18px;
+    border-radius: 24px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 32px;
+    width: fit-content;
+  }
+  .badge::before {
+    content: '';
+    width: 6px; height: 6px;
+    background: #00d4ff;
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+
+  /* 主标题 */
+  .main-title {
+    font-size: 54px;
+    font-weight: 900;
+    line-height: 1.1;
+    margin-bottom: 8px;
+    font-family: 'Inter', 'Noto Sans SC', sans-serif;
+    background: linear-gradient(135deg, #ffffff 0%, #a8d4ff 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .main-title-cn {
+    font-size: 22px;
+    font-weight: 700;
+    color: rgba(255,255,255,0.5);
+    margin-bottom: 16px;
+    letter-spacing: 4px;
+  }
+  .subtitle {
+    font-size: 16px;
+    color: rgba(255,255,255,0.55);
+    line-height: 1.7;
+    margin-bottom: 36px;
+    max-width: 420px;
+  }
+
+  /* 分隔 */
+  .divider {
+    height: 1px;
+    background: linear-gradient(90deg, rgba(0,102,255,0.5), rgba(0,212,255,0.2), transparent);
+    margin: 4px 0 28px;
+  }
+
+  /* 信息行 */
+  .info-list { margin-bottom: 28px; }
+  .info-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 10px 0;
+    font-size: 15px;
+    color: rgba(255,255,255,0.8);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .info-row:last-child { border-bottom: none; }
+  .info-icon {
+    width: 36px; height: 36px;
+    background: rgba(0,102,255,0.2);
+    border: 1px solid rgba(0,102,255,0.3);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+  .info-label {
+    font-size: 11px;
+    color: rgba(255,255,255,0.35);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    display: block;
+    margin-bottom: 2px;
+  }
+  .info-value {
+    font-size: 15px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.9);
+  }
+
+  /* 简介 */
+  .description {
+    font-size: 14px;
+    line-height: 1.85;
+    color: rgba(255,255,255,0.5);
+    margin-bottom: 36px;
+    flex: 1;
+  }
+
+  /* 讲师区 */
+  .speakers {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 32px;
+  }
+  .speaker {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 12px;
+    padding: 10px 16px;
+    flex: 1;
+  }
+  .speaker-avatar {
+    width: 36px; height: 36px;
+    background: linear-gradient(135deg, #0066ff, #00d4ff);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  .speaker-name { font-size: 13px; font-weight: 700; color: #fff; }
+  .speaker-role { font-size: 11px; color: rgba(255,255,255,0.4); }
+
+  /* 底部 */
+  .footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    font-size: 12px;
+    color: rgba(255,255,255,0.25);
+  }
+  .footer-logo {
+    font-weight: 900;
+    font-size: 14px;
+    color: rgba(255,255,255,0.5);
+    letter-spacing: 2px;
+  }
+  .footer-url {
+    color: #00d4ff;
+    font-size: 12px;
+  }
+</style>
+</head>
+<body>
+<div class="poster">
+  <div class="deco deco-1"></div>
+  <div class="deco deco-2"></div>
+  <div class="deco-line"></div>
+
+  <div class="badge">开发者大会</div>
+
+  <div class="main-title">AI Dev<br>Summit</div>
+  <div class="main-title-cn">人工智能开发者峰会</div>
+  <div class="subtitle">探索大模型应用开发的边界，与全球顶尖工程师共同构建 AI 驱动的未来。</div>
+
+  <div class="divider"></div>
+
+  <div class="info-list">
+    <div class="info-row">
+      <div class="info-icon">📅</div>
+      <div>
+        <span class="info-label">时间</span>
+        <span class="info-value">2026年6月15日（周一）14:00 – 18:00</span>
+      </div>
+    </div>
+    <div class="info-row">
+      <div class="info-icon">📍</div>
+      <div>
+        <span class="info-label">地点</span>
+        <span class="info-value">北京·国家会议中心 B2 多功能厅</span>
+      </div>
+    </div>
+    <div class="info-row">
+      <div class="info-icon">🎫</div>
+      <div>
+        <span class="info-label">票务</span>
+        <span class="info-value">免费报名，限额 500 人</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="description">
+    本次峰会将围绕大模型 Agent 开发、RAG 工程实践、多模态应用落地三大主题展开。汇聚来自 OpenAI、Anthropic、百度文心等头部团队的工程师，分享第一手实战经验与最新技术进展。
+  </div>
+
+  <div class="speakers">
+    <div class="speaker">
+      <div class="speaker-avatar">张</div>
+      <div>
+        <div class="speaker-name">张明远</div>
+        <div class="speaker-role">Anthropic · 高级工程师</div>
+      </div>
+    </div>
+    <div class="speaker">
+      <div class="speaker-avatar">L</div>
+      <div>
+        <div class="speaker-name">Li Wei</div>
+        <div class="speaker-role">OpenAI · Research Lead</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div class="footer-logo">AI DEV SUMMIT</div>
+    <div class="footer-url">aidev2026.cn</div>
+  </div>
+</div>
+</body>
+</html>

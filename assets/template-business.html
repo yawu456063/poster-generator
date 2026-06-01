@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>商务专业海报</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&family=Noto+Sans+SC:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        /* 主题色变量 - 替换此处即可切换配色 */
+        :root {
+            --primary: #1e2a4a;
+            --primary-rgb: 30, 42, 74;
+            --bg: #ffffff;
+            --bg-secondary: #f0f2f7;
+            --text: #1e2a4a;
+            --text-secondary: #5a6a8a;
+            --accent: #c9a84c;
+            --accent-rgb: 201, 168, 76;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #d0d3da;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            padding: 40px 20px;
+            font-family: 'Inter', 'Noto Sans SC', sans-serif;
+        }
+
+        .poster {
+            width: 600px;
+            min-height: 850px;
+            background: var(--bg);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.12);
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* 顶部渐变条带 */
+        .top-bar {
+            height: 8px;
+            background: linear-gradient(90deg, var(--primary), rgba(var(--accent-rgb), 0.8));
+        }
+
+        /* 头部区域 - 深色背景 */
+        .header {
+            background: var(--primary);
+            padding: 50px 50px 60px;
+            position: relative;
+        }
+
+        /* 几何装饰色块 */
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 200px;
+            height: 100%;
+            background: linear-gradient(135deg, transparent 40%, rgba(var(--accent-rgb), 0.1));
+        }
+
+        .header::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent), transparent 60%);
+        }
+
+        /* 标签/徽章区 */
+        .badge-area {
+            margin-bottom: 24px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .badge {
+            display: inline-block;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--accent);
+            background: rgba(var(--accent-rgb), 0.12);
+            padding: 6px 16px;
+            border-radius: 2px;
+            animation: badgeGlow 2.5s ease-in-out infinite;
+        }
+
+        @keyframes badgeGlow {
+            0%, 100% { box-shadow: 0 0 0 rgba(var(--accent-rgb), 0); }
+            50% { box-shadow: 0 0 12px rgba(var(--accent-rgb), 0.3); }
+        }
+
+        /* 主标题 */
+        .title {
+            font-size: 38px;
+            font-weight: 900;
+            line-height: 1.25;
+            color: #ffffff;
+            margin-bottom: 16px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* 副标题 */
+        .subtitle {
+            font-size: 16px;
+            font-weight: 400;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.6;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* 内容区域 */
+        .content {
+            padding: 40px 50px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* 分隔线 */
+        .divider {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 32px;
+        }
+
+        .divider .block {
+            width: 24px;
+            height: 3px;
+            background: var(--accent);
+        }
+
+        .divider .line {
+            flex: 1;
+            height: 1px;
+            background: rgba(var(--primary-rgb), 0.1);
+        }
+
+        /* 信息行 */
+        .info-section {
+            margin-bottom: 32px;
+        }
+
+        .info-row {
+            display: flex;
+            align-items: center;
+            padding: 14px 0;
+            border-bottom: 1px solid rgba(var(--primary-rgb), 0.06);
+        }
+
+        .info-row:last-child {
+            border-bottom: none;
+        }
+
+        .info-icon {
+            width: 36px;
+            height: 36px;
+            background: var(--bg-secondary);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 16px;
+            flex-shrink: 0;
+        }
+
+        .info-icon::after {
+            content: '';
+            width: 8px;
+            height: 8px;
+            border: 2px solid var(--accent);
+            border-radius: 1px;
+        }
+
+        .info-content {
+            flex: 1;
+        }
+
+        .info-label {
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--text-secondary);
+            margin-bottom: 2px;
+        }
+
+        .info-value {
+            font-size: 15px;
+            font-weight: 500;
+            color: var(--text);
+        }
+
+        /* 正文描述 */
+        .description {
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 1.8;
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+            padding: 20px 24px;
+            background: var(--bg-secondary);
+            border-left: 3px solid var(--accent);
+            border-radius: 0 4px 4px 0;
+        }
+
+        /* 底部信息栏 */
+        .footer {
+            margin-top: auto;
+            padding-top: 24px;
+            border-top: 2px solid rgba(var(--primary-rgb), 0.08);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-left {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text);
+            letter-spacing: 0.5px;
+        }
+
+        .footer-right {
+            font-size: 11px;
+            color: var(--text-secondary);
+            padding: 6px 14px;
+            background: var(--bg-secondary);
+            border-radius: 2px;
+        }
+    </style>
+</head>
+<body>
+    <div class="poster">
+        <!-- 顶部渐变条带 -->
+        <div class="top-bar"></div>
+
+        <!-- 头部深色区域 -->
+        <div class="header">
+            <!-- POSTER_CONTENT -->
+
+            <!-- 标签/徽章区 -->
+            <div class="badge-area">
+                <span class="badge">行业峰会</span>
+            </div>
+
+            <!-- 主标题 -->
+            <h1 class="title">2026 全球数字化<br>转型峰会</h1>
+
+            <!-- 副标题 -->
+            <p class="subtitle">汇聚行业领袖，探讨企业数字化升级之路</p>
+        </div>
+
+        <!-- 内容区域 -->
+        <div class="content">
+            <!-- 分隔线 -->
+            <div class="divider">
+                <span class="block"></span>
+                <span class="line"></span>
+            </div>
+
+            <!-- 信息行 -->
+            <div class="info-section">
+                <div class="info-row">
+                    <div class="info-icon"></div>
+                    <div class="info-content">
+                        <div class="info-label">时间</div>
+                        <div class="info-value">2026年7月20日 09:00 - 17:30</div>
+                    </div>
+                </div>
+                <div class="info-row">
+                    <div class="info-icon"></div>
+                    <div class="info-content">
+                        <div class="info-label">地点</div>
+                        <div class="info-value">北京国际会议中心 · 主会场A厅</div>
+                    </div>
+                </div>
+                <div class="info-row">
+                    <div class="info-icon"></div>
+                    <div class="info-content">
+                        <div class="info-label">主办</div>
+                        <div class="info-value">中国数字经济研究院</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 正文描述 -->
+            <p class="description">
+                本次峰会邀请 50+ 位行业领袖、技术专家和企业高管，深入探讨人工智能、云计算、数据治理等前沿议题，助力企业把握数字化转型机遇，实现业务增长新突破。
+            </p>
+
+            <!-- 底部信息栏 -->
+            <div class="footer">
+                <div class="footer-left">扫码报名 · 限额 500 人</div>
+                <div class="footer-right">DIGITAL SUMMIT 2026</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
