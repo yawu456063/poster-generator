@@ -1,0 +1,7 @@
+interface:
+  display_name: "Poster Generator"
+  short_description: "Create polished HTML posters from event and campaign details."
+  default_prompt: "Use $poster-generator to create a polished HTML poster from my title, event details, scene, and style preferences."
+
+policy:
+  allow_implicit_invocation: true
