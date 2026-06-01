@@ -3,6 +3,7 @@ name: Unpack poster generator skill
 on:
   push:
     paths:
+      - poster-generator-upload.url
       - poster-generator-upload.zip.b64
       - payload_parts/**
       - .github/workflows/unpack-skill.yml
@@ -18,7 +19,11 @@ jobs:
       - uses: actions/checkout@v4
       - name: Unpack skill files
         run: |
-          if [ -f poster-generator-upload.zip.b64 ]; then
+          if [ -f poster-generator-upload.url ]; then
+            url="$(tr -d '\r\n' < poster-generator-upload.url)"
+            curl -L "$url" -o poster-generator-upload.zip.b64
+            base64 -d poster-generator-upload.zip.b64 > poster-generator-upload.zip
+          elif [ -f poster-generator-upload.zip.b64 ]; then
             base64 -d poster-generator-upload.zip.b64 > poster-generator-upload.zip
           else
             test -d payload_parts
@@ -26,12 +31,12 @@ jobs:
             base64 -d poster-generator-upload.zip.b64 > poster-generator-upload.zip
           fi
           unzip -o poster-generator-upload.zip
-          rm -f poster-generator-upload.zip poster-generator-upload.zip.b64
+          rm -f poster-generator-upload.zip poster-generator-upload.zip.b64 poster-generator-upload.url
           rm -rf payload_parts
       - name: Commit unpacked files
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -A assets references poster-generator-upload.zip.b64 payload_parts .github/workflows/unpack-skill.yml
+          git add -A assets references poster-generator-upload.url poster-generator-upload.zip.b64 payload_parts .github/workflows/unpack-skill.yml
           git diff --cached --quiet || git commit -m "Add poster generator assets and references"
           git push
